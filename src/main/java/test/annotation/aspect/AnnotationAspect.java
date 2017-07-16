@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
 import test.annotation.annotation.TestAnnotation;
 
 import java.lang.reflect.Method;
@@ -13,14 +14,12 @@ import java.lang.reflect.Method;
  * Created by hanchunyang on 2017/7/7.
  */
 @Aspect
-public class annotationAspect {
+@Component
+public class AnnotationAspect {
 
-    public annotationAspect() {
+    public AnnotationAspect() {
     }
-    @Pointcut("@annotation(test.annotation.annotation.TestAnnotation)")
-    private void checkValue(){}
-
-    @Around("checkValue()")
+    @Around("@annotation(test.annotation.annotation.TestAnnotation)")
     public Object checkValue(ProceedingJoinPoint pjp) throws Exception {
 
         MethodSignature ms = (MethodSignature) pjp.getSignature();
