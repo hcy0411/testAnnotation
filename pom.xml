@@ -11,6 +11,10 @@
     <properties>
         <junit.verion>4.11</junit.verion>
         <spring.version>4.2.3.RELEASE</spring.version>
+        <jedis.version>2.9.0</jedis.version>
+        <mybatis.version>3.3.0</mybatis.version>
+        <mybatis-spring.version>1.2.3</mybatis-spring.version>
+        <mysql-connector-java.version>5.1.37</mysql-connector-java.version>
     </properties>
 
     <dependencies>
@@ -34,6 +38,48 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
     </dependencies>
+    <profiles>
+        <!-- 开发/测试环境，默认激活 -->
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault><!--默认启用的是test环境配置 -->
+            </activation>
+        </profile>
+    </profiles>
+    <build>
+        <filters> <!-- 指定使用的 filter -->
+            <filter>src/main/resources/properties/${env}.properties</filter>
+        </filters>
+    </build>
 
 </project>

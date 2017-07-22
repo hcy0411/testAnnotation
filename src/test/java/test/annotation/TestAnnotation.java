@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import test.annotation.data.dao.TestDao;
 import test.annotation.service.AnnotationService;
 
 /**
@@ -16,8 +17,18 @@ public class TestAnnotation {
 
     @Autowired
     private AnnotationService service;
+
+    @Autowired
+    private TestDao testDao;
+
     @Test
     public void testAnnotation(){
         service.testAnnotation();
     }
+
+    @Test
+    public void testInsert(){
+        testDao.testInsert("haha");
+    }
+
 }

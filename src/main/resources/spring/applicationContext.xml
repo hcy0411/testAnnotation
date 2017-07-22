@@ -11,4 +11,6 @@
     <context:component-scan base-package="test.annotation"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
+    <import resource="data-config.xml" />
+    <!--<import resource="redis-cache.xml" />-->
 </beans>
